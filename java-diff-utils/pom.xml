@@ -9,6 +9,12 @@
         <artifactId>java-diff-utils-parent</artifactId>
         <version>4.10-SNAPSHOT</version>
     </parent>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>artifactory</id>
+            <url>https://nexus.tactapp.com/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

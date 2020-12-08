@@ -37,8 +37,8 @@ public final class DeleteDelta<T> extends AbstractDelta<T> {
 
     @Override
     public void applyTo(List<T> target) throws PatchFailedException {
-        verifyChunk(target);
-        int position = getSource().getPosition();
+        int offset=verifyChunk(target);
+        int position = getSource().getPosition()+offset;
         int size = getSource().size();
         for (int i = 0; i < size; i++) {
             target.remove(position);

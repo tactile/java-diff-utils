@@ -18,12 +18,16 @@ package com.github.difflib.patch;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 /**
  * Abstract delta between a source and a target. 
  * @author Tobias Warneke (t.warneke@gmx.net)
  */
 public abstract class AbstractDelta<T> implements Serializable {
+
+    private static final Logger LOG = Logger.getLogger(AbstractDelta.class.getName());
+
     private final Chunk<T> source;
     private final Chunk<T> target;
     private final DeltaType type;
@@ -54,8 +58,10 @@ public abstract class AbstractDelta<T> implements Serializable {
      * @param target
      * @throws PatchFailedException 
      */
-    protected void verifyChunk(List<T> target) throws PatchFailedException {
-        getSource().verify(target);
+    protected int verifyChunk(List<T> target) throws PatchFailedException {
+        int offset=getSource().verify(target);
+        LOG.info("found match with offset "+offset+" for chunk at position "+getSource().getPosition());
+        return offset;
     }
     
     public abstract void applyTo(List<T> target) throws PatchFailedException;

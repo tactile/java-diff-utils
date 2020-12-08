@@ -37,8 +37,8 @@ public final class InsertDelta<T> extends AbstractDelta<T> {
 
     @Override
     public void applyTo(List<T> target) throws PatchFailedException {
-        verifyChunk(target);
-        int position = this.getSource().getPosition();
+        int offset=verifyChunk(target);
+        int position = this.getSource().getPosition()+offset;
         List<T> lines = this.getTarget().getLines();
         for (int i = 0; i < lines.size(); i++) {
             target.add(position + i, lines.get(i));
